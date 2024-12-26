@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	// Step 1: Create a New User Service Application
+	// Step 1: Create a New Product Service Application
 	app := products.NewApp()
 
 	// Step 2: Start Server and Listen on the Port 8001
