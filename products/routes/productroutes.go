@@ -39,7 +39,7 @@ func ProductServiceInfo(c *fiber.Ctx) error {
 // @Tags         Products
 // @Accept       json
 // @Produce      json
-// @Success      200  {array}   model.Product
+// @Success      200  {array}   model.ProductResponse
 // @Failure      500  {object}  fiber.Error
 // @Router       /products [get]
 func GetAllProducts(c *fiber.Ctx, service *service.ProductService) error {
@@ -58,7 +58,7 @@ func GetAllProducts(c *fiber.Ctx, service *service.ProductService) error {
 // @Accept       json
 // @Produce      json
 // @Param        id   path      int  true  "Product ID"
-// @Success      200  {object}  model.Product
+// @Success      200  {object}  model.ProductResponse
 // @Failure      404  {object}  fiber.Error
 // @Failure      500  {object}  fiber.Error
 // @Router       /products/{id} [get]
@@ -78,17 +78,19 @@ func GetProductByID(c *fiber.Ctx, service *service.ProductService) error {
 // @Tags         Products
 // @Accept       json
 // @Produce      json
-// @Param        product  body      model.Product  true  "Product details"
-// @Success      201   {object}  model.Product
+// @Param        product  body      model.ProductCreateRequest  true  "Product details"
+// @Success      201   {object}  model.ProductResponse
 // @Failure      400   {object}  fiber.Error
 // @Failure      500   {object}  fiber.Error
 // @Router       /products [post]
 func CreateProduct(c *fiber.Ctx, service *service.ProductService) error {
-	var product model.Product
-	if err := c.BodyParser(&product); err != nil {
+	var productReq model.ProductCreateRequest
+	if err := c.BodyParser(&productReq); err != nil {
 		return fiber.NewError(fiber.StatusBadRequest, "Invalid input")
 	}
-	if err := service.CreateProduct(&product); err != nil {
+
+	product, err := service.CreateProduct(&productReq)
+	if err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
 	}
 	return c.Status(fiber.StatusCreated).JSON(product)
@@ -102,20 +104,21 @@ func CreateProduct(c *fiber.Ctx, service *service.ProductService) error {
 // @Accept       json
 // @Produce      json
 // @Param        id    path      int         true  "Product ID"
-// @Param        product  body      model.Product  true  "Updated product details"
-// @Success      200   {object}  model.Product
+// @Param        product  body      model.ProductUpdateRequest  true  "Updated product details"
+// @Success      200   {object}  model.ProductResponse
 // @Failure      400   {object}  fiber.Error
 // @Failure      404   {object}  fiber.Error
 // @Failure      500   {object}  fiber.Error
 // @Router       /products/{id} [put]
 func UpdateProduct(c *fiber.Ctx, service *service.ProductService) error {
 	id, _ := strconv.Atoi(c.Params("id"))
-	var product model.Product
-	if err := c.BodyParser(&product); err != nil {
+	var productReq model.ProductUpdateRequest
+	if err := c.BodyParser(&productReq); err != nil {
 		return fiber.NewError(fiber.StatusBadRequest, "Invalid input")
 	}
-	product.ID = uint(id)
-	if err := service.UpdateProduct(&product); err != nil {
+	productReq.ID = uint(id)
+	product, err := service.UpdateProduct(&productReq)
+	if err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
 	}
 	return c.JSON(product)

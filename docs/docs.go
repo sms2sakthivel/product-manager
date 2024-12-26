@@ -58,7 +58,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/model.Product"
+                                "$ref": "#/definitions/model.ProductResponse"
                             }
                         }
                     },
@@ -89,7 +89,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.Product"
+                            "$ref": "#/definitions/model.ProductCreateRequest"
                         }
                     }
                 ],
@@ -97,7 +97,7 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/model.Product"
+                            "$ref": "#/definitions/model.ProductResponse"
                         }
                     },
                     "400": {
@@ -141,7 +141,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Product"
+                            "$ref": "#/definitions/model.ProductResponse"
                         }
                     },
                     "404": {
@@ -184,7 +184,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.Product"
+                            "$ref": "#/definitions/model.ProductUpdateRequest"
                         }
                     }
                 ],
@@ -192,7 +192,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Product"
+                            "$ref": "#/definitions/model.ProductResponse"
                         }
                     },
                     "400": {
@@ -262,7 +262,7 @@ const docTemplate = `{
                 }
             }
         },
-        "model.Product": {
+        "model.ProductCreateRequest": {
             "type": "object",
             "properties": {
                 "brand": {
@@ -271,13 +271,59 @@ const docTemplate = `{
                 "category": {
                     "type": "string"
                 },
-                "id": {
+                "price": {
                     "type": "integer"
                 },
-                "name": {
+                "product_name": {
                     "type": "string"
                 },
-                "subCategory": {
+                "sub_category": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.ProductResponse": {
+            "type": "object",
+            "properties": {
+                "brand": {
+                    "type": "string"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "product_id": {
+                    "type": "integer"
+                },
+                "product_name": {
+                    "type": "string"
+                },
+                "sub_category": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.ProductUpdateRequest": {
+            "type": "object",
+            "properties": {
+                "brand": {
+                    "type": "string"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "product_id": {
+                    "type": "integer"
+                },
+                "product_name": {
+                    "type": "string"
+                },
+                "sub_category": {
                     "type": "string"
                 }
             }

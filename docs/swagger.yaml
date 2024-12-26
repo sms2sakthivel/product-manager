@@ -6,17 +6,47 @@ definitions:
       message:
         type: string
     type: object
-  model.Product:
+  model.ProductCreateRequest:
     properties:
       brand:
         type: string
       category:
         type: string
-      id:
+      price:
         type: integer
-      name:
+      product_name:
         type: string
-      subCategory:
+      sub_category:
+        type: string
+    type: object
+  model.ProductResponse:
+    properties:
+      brand:
+        type: string
+      category:
+        type: string
+      price:
+        type: integer
+      product_id:
+        type: integer
+      product_name:
+        type: string
+      sub_category:
+        type: string
+    type: object
+  model.ProductUpdateRequest:
+    properties:
+      brand:
+        type: string
+      category:
+        type: string
+      price:
+        type: integer
+      product_id:
+        type: integer
+      product_name:
+        type: string
+      sub_category:
         type: string
     type: object
 info:
@@ -50,7 +80,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/model.Product'
+              $ref: '#/definitions/model.ProductResponse'
             type: array
         "500":
           description: Internal Server Error
@@ -69,14 +99,14 @@ paths:
         name: product
         required: true
         schema:
-          $ref: '#/definitions/model.Product'
+          $ref: '#/definitions/model.ProductCreateRequest'
       produces:
       - application/json
       responses:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/model.Product'
+            $ref: '#/definitions/model.ProductResponse'
         "400":
           description: Bad Request
           schema:
@@ -127,7 +157,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Product'
+            $ref: '#/definitions/model.ProductResponse'
         "404":
           description: Not Found
           schema:
@@ -154,14 +184,14 @@ paths:
         name: product
         required: true
         schema:
-          $ref: '#/definitions/model.Product'
+          $ref: '#/definitions/model.ProductUpdateRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Product'
+            $ref: '#/definitions/model.ProductResponse'
         "400":
           description: Bad Request
           schema:
