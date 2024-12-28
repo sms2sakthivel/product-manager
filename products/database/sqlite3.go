@@ -11,7 +11,7 @@ var DB *gorm.DB
 
 // Connect initializes the SQLite database connection
 func Connect() {
-	db, err := gorm.Open(sqlite.Open("../ecom.db"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("../products.db"), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
