@@ -2,6 +2,7 @@ package products
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/sms2sakthivel/product-manager/products/database"
 	"github.com/sms2sakthivel/product-manager/products/model"
 	"github.com/sms2sakthivel/product-manager/products/repository"
@@ -21,7 +22,12 @@ func NewApp() *fiber.App {
 	service := &service.ProductService{Repo: repo}
 	app := fiber.New()
 
-	// Step 4: Register routes
+	// Step 4: Enable Logger middleware with timing
+	app.Use(logger.New(logger.Config{
+		Format: "${time} - ${latency} - ${status} - ${method} ${path}\n",
+	}))
+
+	// Step 5: Register routes
 	routes.RegisterRoutes(app, service)
 	return app
 }
