@@ -1,13 +1,13 @@
 {
     "repository" : {
-        "project_name": "Product Management Service",
+        "project_name": "Product Service",
         "guid": "52C827E0-2D3F-4D11-9C3C-12EDF7EFFE2E",
         "description": "Creates and Manages the entire lifecycle of the Products"
         "jira_instance_url": "http://host.docker.internal:8080",
         "jira_project_key": "PRODMAN",
     },
     "branch" : {
-        "project_name": "Product Management Service",
+        "project_name": "Product Service",
         "guid": "52C827E0-2D3F-4D11-9C3C-12EDF7EFFE2E",
         "description": "Creates and Manages the entire lifecycle of the Products"
         "jira_instance_url": "http://host.docker.internal:8080",
